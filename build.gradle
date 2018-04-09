@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+apply plugin: 'war'
+
 buildscript {
     repositories {
         mavenCentral()
@@ -89,9 +91,11 @@ configure([
 
 task copyKotlinLibs() {}
 
-task stage(dependsOn: copyKotlinLibs){
-
+task createWars(dependsOn: copyKotlinLibs){
+    war
 }
+
+task stage(dependsOn: createWars){}
 
 for (kotlinVersion in kotlinVersions) {
     copyKotlinLibs.dependsOn(":versions:$kotlinVersion:copyKotlinLibs")
