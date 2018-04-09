@@ -89,6 +89,10 @@ configure([
 
 task copyKotlinLibs() {}
 
+task stage(dependsOn: copyKotlinLibs){
+
+}
+
 for (kotlinVersion in kotlinVersions) {
     copyKotlinLibs.dependsOn(":versions:$kotlinVersion:copyKotlinLibs")
 }
