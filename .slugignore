@@ -6,7 +6,3 @@ kotlin.web.demo.common
 kotlin.web.demo.executors
 versions
 docker
-gradle
-.heroku
-.gradle
-.jdk
