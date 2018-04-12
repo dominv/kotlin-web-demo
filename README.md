@@ -33,11 +33,13 @@ this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/mast
 
 ## Heroku deployment :whale:
 
-Once the 'WebDemoWar.war' and the 'WebDemoBackend.war' have been generated in local, run:
+Once the `WebDemoWar.war` and the `WebDemoBackend.war` have been generated in local, run:
 
+```bash
 heroku deploy:war  kotlin.web.demo.server/build/libs/WebDemoWar.war kotlin.web.demo.backend/build/libs/WebDemoBackend.war --app <your-app-name>
+```
 
-The added 'Procfile' will provide the information heroku needs to run this processes.
+The added `Procfile` will provide the information heroku needs to run this processes.
 
 ## How to add your own courses :memo:
 
