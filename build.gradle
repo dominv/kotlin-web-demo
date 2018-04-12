@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-apply plugin: 'war'
+apply plugin: 'idea'
 
 buildscript {
     repositories {
@@ -91,23 +91,9 @@ configure([
 
 task copyKotlinLibs() {}
 
-dependencies {
-    compile 'com.github.jsimone:webapp-runner:8.5.11.3'
+subprojects {
+    apply from: file("$rootProject.projectDir/gradle/heroku/stage.gradle")
 }
-
-task stage() {
-    dependsOn clean, war
-}
-war.mustRunAfter clean
-
-task copyToLib(type: Copy) {
-    into "$buildDir/server"
-    from(configurations.compile) {
-        include "webapp-runner*"
-    }
-}
-
-stage.dependsOn(copyToLib)
 
 for (kotlinVersion in kotlinVersions) {
     copyKotlinLibs.dependsOn(":versions:$kotlinVersion:copyKotlinLibs")
