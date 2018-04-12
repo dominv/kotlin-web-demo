@@ -31,6 +31,14 @@ this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/mast
     <Environment name="github_secret" value="YOUR-SECRET-KEY" type="java.lang.String" override="false"/>
 ```
 
+## Heroku deployment :whale:
+
+Once the 'WebDemoWar.war' and the 'WebDemoBackend.war' have been generated in local, run:
+
+heroku deploy:war  kotlin.web.demo.server/build/libs/WebDemoWar.war kotlin.web.demo.backend/build/libs/WebDemoBackend.war --app <your-app-name>
+
+The added 'Procfile' will provide the information heroku needs to run this processes.
+
 ## How to add your own courses :memo:
 
   - Add a course name to [manifest.json](https://github.com/JetBrains/kotlin-web-demo/tree/master/kotlin.web.demo.server/examples).
