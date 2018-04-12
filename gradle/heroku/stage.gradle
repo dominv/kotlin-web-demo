@@ -20,6 +20,10 @@ task stage(dependsOn: ['clean', 'war'])
 
 task copyKotlinLibs() {}
 
+for (kotlinVersion in kotlinVersions) {
+    copyKotlinLibs.dependsOn(":versions:$kotlinVersion:copyKotlinLibs")
+}
+
 task copyWarsToLib(type: Copy) {
     from "$buildDir/libs"
     into "$rootProject.buildDir/libs"

@@ -91,10 +91,6 @@ subprojects {
     apply from: file("$rootProject.projectDir/gradle/heroku/stage.gradle")
 }
 
-for (kotlinVersion in kotlinVersions) {
-    copyKotlinLibs.dependsOn(":versions:$kotlinVersion:copyKotlinLibs")
-}
-
 project("kotlin.web.demo.executors") {
     dependencies {
         compile group: 'junit', 'name': 'junit', 'version': '4.12'
