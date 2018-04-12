@@ -1,0 +1,12 @@
+kotlin.web.demo.backend
+kotlin.web.demo.server
+kotlin.web.demo.frontend
+kotlin.web.demo.test
+kotlin.web.demo.common
+kotlin.web.demo.executors
+versions
+docker
+gradle
+.heroku
+.gradle
+.jdk
