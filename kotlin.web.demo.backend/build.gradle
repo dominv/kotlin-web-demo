@@ -10,6 +10,7 @@ buildscript {
 
 apply plugin: "kotlin"
 apply plugin: 'war'
+apply plugin: 'idea'
 
 dependencies {
     compile project(":kotlin.web.demo.backend:compilers")
