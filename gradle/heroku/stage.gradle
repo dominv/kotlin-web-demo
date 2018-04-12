@@ -18,9 +18,12 @@ apply plugin: 'war'
 
 task stage(dependsOn: ['clean', 'war'])
 
+task copyKotlinLibs() {}
+
 task copyWarsToLib(type: Copy) {
     from "$buildDir/libs"
     into "$rootProject.buildDir/libs"
 }
+war.dependsOn(copyKotlinLibs)
 copyWarsToLib.dependsOn(war)
 stage.dependsOn(copyWarsToLib)

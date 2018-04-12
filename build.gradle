@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-apply plugin: 'idea'
-
 buildscript {
     repositories {
         mavenCentral()
@@ -88,8 +86,6 @@ configure([
         compile project(':kotlin.web.demo.common')
     }
 }
-
-task copyKotlinLibs() {}
 
 subprojects {
     apply from: file("$rootProject.projectDir/gradle/heroku/stage.gradle")
