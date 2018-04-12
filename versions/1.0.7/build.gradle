@@ -26,6 +26,7 @@ dependencies {
     library tc("$prefix/kotlin-reflect.jar")
     library tc("$prefix/kotlin-test.jar")
     library tc("$prefix/kotlin-jslib.jar")
+    library group: 'io.arrow-kt', name: 'arrow-data', version: arrowKtVersion
 
     /**
      * ADD DEPENDENCIES TO KOTLIN 1.0.7 COMPILER

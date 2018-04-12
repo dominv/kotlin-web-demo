@@ -30,6 +30,7 @@ dependencies {
     library tc("$root/kotlin-jslib.jar")
     library "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.17"
     library group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jre8', version: stdlibVersion
+    library group: 'io.arrow-kt', name: 'arrow-data', version: arrowKtVersion
 
     /**
      * ADD DEPENDENCIES TO KOTLIN 1.1.60 COMPILER
