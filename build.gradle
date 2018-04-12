@@ -87,6 +87,12 @@ configure([
     }
 }
 
+task copyKotlinLibs() {}
+
+for (kotlinVersion in kotlinVersions) {
+    copyKotlinLibs.dependsOn(":versions:$kotlinVersion:copyKotlinLibs")
+}
+
 subprojects {
     apply from: file("$rootProject.projectDir/gradle/heroku/stage.gradle")
 }
