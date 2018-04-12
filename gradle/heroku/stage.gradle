@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-task stage(dependsOn: ['clean', 'shadowJar'])
+task stage(dependsOn: ['clean', 'war'])
 
 task copyToLib(type: Copy) {
     from "$buildDir/libs"
     into "$rootProject.buildDir/libs"
 }
-copyToLib.dependsOn(shadowJar)
+copyToLib.dependsOn(war)
 stage.dependsOn(copyToLib)
