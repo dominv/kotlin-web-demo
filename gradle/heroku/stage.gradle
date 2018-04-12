@@ -16,11 +16,18 @@
 
 apply plugin: 'war'
 
+dependencies {
+    compile 'com.github.jsimone:webapp-runner:8.5.11.3'
+}
+
 task stage(dependsOn: ['clean', 'war'])
+war.mustRunAfter clean
 
 task copyWarsToLib(type: Copy) {
-    from "$buildDir/libs"
-    into "$rootProject.buildDir/libs"
+    into "$buildDir/server"
+    from(configurations.compile) {
+        include "webapp-runner*"
+    }
 }
 copyWarsToLib.dependsOn(war)
 stage.dependsOn(copyWarsToLib)
