@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+apply plugin: "kotlin"
+apply plugin: 'war'
+
 task stage(dependsOn: ['clean', 'war'])
 
 task copyToLib(type: Copy) {
