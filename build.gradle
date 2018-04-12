@@ -95,6 +95,7 @@ for (kotlinVersion in kotlinVersions) {
 
 subprojects {
     apply from: file("$rootProject.projectDir/gradle/heroku/stage.gradle")
+    stage.dependsOn(copyKotlinLibs)
 }
 
 project("kotlin.web.demo.executors") {
