@@ -2,6 +2,10 @@
 
 AWSINSTANCE=$1
 
+sh ./gradlew ::copyKotlinLibs
+
+sh ./gradlew war
+
 mkdir ./docker/frontend/war/
 
 mkdir ./docker/backend/war/

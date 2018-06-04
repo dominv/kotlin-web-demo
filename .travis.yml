@@ -15,8 +15,7 @@ install:
  - docker-machine version
 
 before_script:
- - sh ./gradlew ::copyKotlinLibs
- - sh ./gradlew war
+ - sudo service mysql stop
  - chmod +x deploy.sh
 
 script:
