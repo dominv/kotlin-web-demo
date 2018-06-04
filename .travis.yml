@@ -6,7 +6,6 @@ services:
 
 install:
  - sudo apt-get update
- - sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" --assume-yes install docker-engine
  - docker version
  - sudo pip install docker-compose
  - base=https://github.com/docker/machine/releases/download/v0.14.0 &&
