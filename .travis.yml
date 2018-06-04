@@ -1,4 +1,5 @@
 sudo: required
+dist: trusty
 
 services:
   - docker
@@ -17,12 +18,7 @@ before_script:
  - sudo service mysql stop
  - sh ./gradlew ::copyKotlinLibs
  - sh ./gradlew war
- - mkdir ./docker/frontend/war/
- - mkdir ./docker/backend/war/
- - cp ./kotlin.web.demo.server/build/libs/WebDemoWar.war ./docker/frontend/war/WebDemoWar.war
- - cp ./kotlin.web.demo.backend/build/libs/WebDemoBackend.war ./docker/backend/war/WebDemoBackend.war
- - docker-machine create --driver amazonec2 aws066
- - docker-machine env aws066
- - eval $(docker-machine env aws066)
- - docker-compose build
- - docker-compose up
+ - chmod +x deploy.sh
+
+script:
+ - sh deploy.sh aws01

@@ -35,13 +35,20 @@ this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/mast
 
  - Install docker in your localhost. [Installation link](https://docs.docker.com/engine/installation/)
  - Install docker-machine in your localhost. [Installation link](https://docs.docker.com/machine/install-machine/)
- - Install docker-compose in your localhost. [Installation link](https://docs.docker.com/compose/install/)
  - Set up your AWS credentials in your localhost. [docker-machine + aws](https://docs.docker.com/machine/drivers/aws/)
  - Create AWS EC2 instance only the first time:
  ```bash
 docker-machine create --driver amazonec2 <your-instance-name>
  ```
- - Run ```deploy.sh <your-instance-name>``` script.
+ - Connect to your AWS EC2 instance using:
+  ```bash
+ docker-machine ssh <your-instance-name>
+  ```
+ - Clone this repo:
+   ```bash
+  git clone https://github.com/dominv/kotlin-web-demo
+   ```
+ - Go to kotlin-web-demo directory and run ```deploy.sh <your-instance-name>``` script.
 
 ## How to add your own courses :memo:
 

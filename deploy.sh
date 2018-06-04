@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
-AWSINSTANCE=$1
+sudo apt update
+
+sudo apt install docker
+
+sudo service docker start
+
+docker version
+
+sudo pip install docker-compose
+
+docker-compose version
 
 sh ./gradlew ::copyKotlinLibs
 
@@ -13,10 +23,6 @@ mkdir ./docker/backend/war/
 cp ./kotlin.web.demo.server/build/libs/WebDemoWar.war ./docker/frontend/war/WebDemoWar.war
 
 cp ./kotlin.web.demo.backend/build/libs/WebDemoBackend.war ./docker/backend/war/WebDemoBackend.war
-
-docker-machine env $AWSINSTANCE
-
-eval $(docker-machine env $AWSINSTANCE)
 
 docker-compose build
 
