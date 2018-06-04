@@ -31,15 +31,17 @@ this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/mast
     <Environment name="github_secret" value="YOUR-SECRET-KEY" type="java.lang.String" override="false"/>
 ```
 
-## Heroku deployment :whale:
+## Deploy to AWS using docker-machine and docker-compose:
 
-Once the `WebDemoWar.war` and the `WebDemoBackend.war` have been generated in local, run:
-
-```bash
-heroku deploy:war  kotlin.web.demo.server/build/libs/WebDemoWar.war kotlin.web.demo.backend/build/libs/WebDemoBackend.war --app <your-app-name>
-```
-
-The added `Procfile` will provide the information heroku needs to run this processes.
+ - Install docker in your localhost. [Installation link](https://docs.docker.com/engine/installation/)
+ - Install docker-machine in your localhost. [Installation link](https://docs.docker.com/machine/install-machine/)
+ - Install docker-compose in your localhost. [Installation link](https://docs.docker.com/compose/install/)
+ - Set up your AWS credentials in your localhost. [docker-machine + aws](https://docs.docker.com/machine/drivers/aws/)
+ - Create AWS EC2 instance only the first time:
+ ```bash
+docker-machine create --driver amazonec2 <your-instance-name>
+ ```
+ - Run ```deploy.sh <your-instance-name>``` script.
 
 ## How to add your own courses :memo:
 
