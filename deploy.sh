@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
 
-sudo apt update
-
-sudo apt install docker
-
-sudo service docker start
+apt update
 
 docker version
 
-sudo pip install docker-compose
+pip install docker-compose
 
 docker-compose version
 
