@@ -16,7 +16,13 @@ install:
 
 before_script:
  - sudo service mysql stop
- - chmod +x deploy.sh
-
-script:
- - sh deploy.sh aws01
+ - sh ./gradlew ::copyKotlinLibs
+ - sh ./gradlew war
+ -  mkdir ./docker/frontend/war/
+ - mkdir ./docker/backend/war/
+ - cp ./kotlin.web.demo.server/build/libs/WebDemoWar.war ./docker/frontend/war/WebDemoWar.war
+ - cp ./kotlin.web.demo.backend/build/libs/WebDemoBackend.war ./docker/backend/war/WebDemoBackend.war
+ - docker-machine env aws01
+ - eval $(docker-machine env aws01)
+ - docker-compose build
+ - docker-compose up
