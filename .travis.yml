@@ -19,7 +19,8 @@ before_script:
  - sh ./gradlew war
  - chmod +x deploy.sh
  - pwd
- - ls ./docker/frontend/war/
+ - ls
+ - ls docker/frontend/war/
 
 script:
  - sudo sh deploy.sh aws01
