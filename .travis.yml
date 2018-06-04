@@ -21,8 +21,8 @@ before_script:
  - mkdir ./docker/backend/war/
  - cp ./kotlin.web.demo.server/build/libs/WebDemoWar.war ./docker/frontend/war/WebDemoWar.war
  - cp ./kotlin.web.demo.backend/build/libs/WebDemoBackend.war ./docker/backend/war/WebDemoBackend.war
- - docker-machine provision aws01
- - docker-machine env aws01
+ - docker-machine create --driver amazonec2 aws02
+ - docker-machine env aws02
  - eval $(docker-machine env aws01)
  - docker-compose build
  - docker-compose up
