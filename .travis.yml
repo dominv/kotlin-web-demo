@@ -1,3 +1,20 @@
+sudo: required
+dist: trusty
+
+services:
+  - docker
+
+install:
+ - sudo apt-get update
+ - sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" --assume-yes install docker-engine
+ - docker version
+ - sudo pip install docker-compose
+ - base=https://github.com/docker/machine/releases/download/v0.14.0 &&
+     curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+     sudo install /tmp/docker-machine /usr/local/bin/docker-machine
+ - docker-compose version
+ - docker-machine version
+
 before_script:
  - chmod +x deploy.sh
 
