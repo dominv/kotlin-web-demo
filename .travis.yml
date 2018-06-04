@@ -18,9 +18,6 @@ before_script:
  - sh ./gradlew ::copyKotlinLibs
  - sh ./gradlew war
  - chmod +x deploy.sh
- - pwd
- - ls
- - ls ./docker/frontend/war/
 
 script:
  - sh deploy.sh aws01
