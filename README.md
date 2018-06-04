@@ -41,13 +41,13 @@ this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/mast
 docker-machine create --driver amazonec2 <your-instance-name>
  ```
  - Connect to your AWS EC2 instance using:
-  ```bash
- docker-machine ssh <your-instance-name>
-  ```
+```bash
+docker-machine ssh <your-instance-name>
+```
  - Clone this repo:
-   ```bash
-  git clone https://github.com/dominv/kotlin-web-demo
-   ```
+```bash
+git clone https://github.com/dominv/kotlin-web-demo
+```
  - Go to kotlin-web-demo directory and run ```deploy.sh <your-instance-name>``` script.
 
 ## How to add your own courses :memo:
