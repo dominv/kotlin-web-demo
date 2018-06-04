@@ -20,7 +20,7 @@ before_script:
  - chmod +x deploy.sh
  - pwd
  - ls
- - ls docker/frontend/war/
+ - ls ./docker/frontend/war/
 
 script:
- - sudo sh deploy.sh aws01
+ - sh deploy.sh aws01
