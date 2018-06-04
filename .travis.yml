@@ -18,4 +18,4 @@ before_script:
  - chmod +x deploy.sh
 
 script:
- - sudo sh deploy.sh $AWSINSTANCE
+ - sh deploy.sh $AWSINSTANCE
