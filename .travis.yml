@@ -25,6 +25,8 @@ script:
  - mkdir ./docker/backend/war/
  - cp ./kotlin.web.demo.server/build/libs/WebDemoWar.war ./docker/frontend/war/WebDemoWar.war
  - cp ./kotlin.web.demo.backend/build/libs/WebDemoBackend.war ./docker/backend/war/WebDemoBackend.war
+ - mkdir certs
+ - openssl req -newkey rsa:4096 -nodes -sha256 -keyout certs/dockerrepo.key -x509 -days 365 -out certs/dockerrepo.crt -subj /CN=local-registry
  - docker-machine create --driver none --url=tcp://107.23.241.80:2376 trykotlinweb
  - docker-machine ls
  - docker-machine regenerate-certs -f trykotlinweb
