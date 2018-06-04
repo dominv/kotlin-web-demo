@@ -48,7 +48,7 @@ docker-machine ssh <your-instance-name>
 ```bash
 git clone https://github.com/dominv/kotlin-web-demo
 ```
- - Go to kotlin-web-demo directory and run ```sudo deploy.sh``` script.
+ - Go to kotlin-web-demo directory and run ```sh deploy.sh``` script.
 
 ## How to add your own courses :memo:
 
