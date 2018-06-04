@@ -2,9 +2,9 @@
 
 AWSINSTANCE=$1
 
-cp kotlin.web.demo.server/build/libs/WebDemoWar.war docker/frontend/war/WebDemoWar.war
+cp ./kotlin.web.demo.server/build/libs/WebDemoWar.war ./docker/frontend/war/WebDemoWar.war
 
-cp kotlin.web.demo.backend/build/libs/WebDemoBackend.war docker/backend/war/WebDemoBackend.war
+cp ./kotlin.web.demo.backend/build/libs/WebDemoBackend.war ./docker/backend/war/WebDemoBackend.war
 
 docker-machine env $AWSINSTANCE
 
