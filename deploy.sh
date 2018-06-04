@@ -2,7 +2,7 @@
 
 sudo apt-get update
 
-sudo service docker start
+sudo service mysql stop
 
 sudo apt-get install openjdk-8-jdk
 
