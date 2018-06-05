@@ -50,6 +50,14 @@ docker-machine ssh <your-instance-name>
 git clone https://github.com/dominv/kotlin-web-demo
 ```
  - Go to kotlin-web-demo directory and run ```sh deploy.sh``` script.
+ - When it finishes, run:
+```bash
+sudo docker-compose build
+```
+ - And finally:
+ ```bash
+ sudo docker-compose up
+ ```
 
 ## How to add your own courses :memo:
 
