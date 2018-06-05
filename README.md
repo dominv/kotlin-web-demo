@@ -44,6 +44,7 @@ docker-machine create --driver amazonec2 <your-instance-name>
 ```bash
 docker-machine ssh <your-instance-name>
 ```
+ - We recommend to use ```screen -D -RR```
  - Clone this repo:
 ```bash
 git clone https://github.com/dominv/kotlin-web-demo
