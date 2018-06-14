@@ -30,6 +30,17 @@ this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/mast
     <Environment name="github_key" value="YOUR-KEY" type="java.lang.String" override="false"/>
     <Environment name="github_secret" value="YOUR-SECRET-KEY" type="java.lang.String" override="false"/>
 ```
+## Deploy to AWS:
+
+- Create instance in ec2 console
+- Download private key *.pem file
+- cp trykotlinwebdemo.pem ~/.ssh
+- chmod 400 ~/.ssh/trykotlinwebdemo.pem
+- ssh -i ~/.ssh/trykotlinwebdemo.pem  ec2-user@ec2-18-232-173-44.compute-1.amazonaws.com
+
+- copy setup.sh and run ```sh setup.sh```
+- cd kotlin-web-demo
+- run ```sh deploy.sh```
 
 ## Deploy to AWS using docker-machine and docker-compose:
 
