@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+sudo docker-compose down
+
 sh gradlew war
 
 sudo cp ./kotlin.web.demo.server/build/libs/WebDemoWar.war ./docker/frontend/war/WebDemoWar.war
