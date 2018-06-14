@@ -5,7 +5,7 @@ services:
     build: docker/db
     environment:
         MYSQL_ROOT_PASSWORD: root
-        - MYSQL_HOST=   # override from env file to be empty
+        MYSQL_HOST:   # override from env file to be empty
     ports:
       - 3306:3306
   backend:
