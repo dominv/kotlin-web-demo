@@ -19,7 +19,7 @@ sudo add-apt-repository \
 
 sudo apt-get update
 
-sudo apt-get install docker-ce
+sudo apt-get -y install docker-ce
 
 sudo service docker start
 
