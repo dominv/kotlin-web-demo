@@ -79,6 +79,7 @@ sudo docker-compose build
 
 ## How to add your own courses :memo:
 
+
   - Add a course name to [manifest.json](https://github.com/JetBrains/kotlin-web-demo/tree/master/kotlin.web.demo.server/examples).
   - Use that name to create a folder next to the [Examples folder](https://github.com/JetBrains/kotlin-web-demo/tree/master/kotlin.web.demo.server/examples)
   and put your course content under it.
