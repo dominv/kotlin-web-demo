@@ -6,6 +6,6 @@ before_script:
 - openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./.secret -out ./trykotlinwebdemo.pem -d -a
 
 script:
-- ssh -i ~/.ssh/trykotlinwebdemo.pem  ubuntu@ec2-54-197-39-160.compute-1.amazonaws.com
+- ssh -i -y ~/.ssh/trykotlinwebdemo.pem  ubuntu@ec2-54-197-39-160.compute-1.amazonaws.com
 - cd kotlin-web-demo
 - sh deploy.sh
