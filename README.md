@@ -39,6 +39,12 @@ this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/mast
 - ssh -i ~/.ssh/trykotlinwebdemo.pem  ec2-user@ec2-18-232-173-44.compute-1.amazonaws.com
 
 - copy setup.sh and run ```sh setup.sh```
+- export TRAVIS_CI_SECRET=`cat /dev/urandom | head -c 10000 | openssl sha1`
+- openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ~/.ssh/travisci-aws.pem -out ./.secret -a
+- create env var with $TRAVIS_CI_SECRET
+- before_script:
+  - openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./.secret -out ./travisci-aws.pem -d -a
+
 - cd kotlin-web-demo
 - run ```sh deploy.sh```
 
