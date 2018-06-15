@@ -7,4 +7,4 @@ before_script:
 - chmod 400 ./trykotlinwebdemo.pem
 
 script:
-- ssh -o "StrictHostKeyChecking no" -i ./trykotlinwebdemo.pem ubuntu@ec2-54-197-39-160.compute-1.amazonaws.com 'sh ./kotlin-web-demo/deploy.sh; exit'
+- ssh -o "StrictHostKeyChecking no" -i ./trykotlinwebdemo.pem ubuntu@ec2-54-197-39-160.compute-1.amazonaws.com 'sh kotlin-web-demo/deploy.sh; exit'
