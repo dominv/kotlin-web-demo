@@ -4,6 +4,7 @@ env:
 
 before_script:
 - openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./.secret -out ./trykotlinwebdemo.pem -d -a
+- chmod 400 ./trykotlinwebdemo.pem
 
 script:
 - ssh -o "StrictHostKeyChecking no" -i ./trykotlinwebdemo.pem ubuntu@ec2-54-197-39-160.compute-1.amazonaws.com
