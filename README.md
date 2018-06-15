@@ -48,6 +48,7 @@ this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/mast
 - cd kotlin-web-demo
 - run ```sh deploy.sh```
 
+
 ## Deploy to AWS using docker-machine and docker-compose:
 
  - Install docker in your localhost. [Installation link](https://docs.docker.com/engine/installation/)
