@@ -1,36 +1,11 @@
-sudo: required
-dist: trusty
-
-services:
-  - docker
-
-install:
- - sudo apt-get update
- - docker version
- - sudo pip install docker-compose
- - base=https://github.com/docker/machine/releases/download/v0.14.0 &&
-     curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
-     sudo install /tmp/docker-machine /usr/local/bin/docker-machine
- - docker-compose version
- - docker-machine version
+env:
+  global:
+    secure: CrTwTZhuhC2DYlaQax0H1NbdrYTQ2C1yn0tSNKVcY2IPaONg1HfVx0pcLY/Xto/43QQRHGRrB5Rcz3a3hIWuD0rdnQXUDWsKo1Bn2N1G14FBMPo1mvkO4aIMsePjVRGKOVMeOaGKF/eXTgAL2etxBpwsPD5g8+vI/ScLoXGHG6z154+hk/ylYE0tG6bKbGt46UX0MotlCuSXzB4ns1Ly4ntG89SbJ2rtBKnP1EBkmQiB+yv4yKp6okqdTA2P17yu0rJg5vXhJCJd83KnVTk0V+OTEqPHSv9APpOueH64bZGhypxHHN9IGIxpEhfWIDf1xFRmM8XMr+ec/wg879Hrd6JJvYJBWz56MfZPUG+Kl/eD4NzjcvbCgLrMT+MiZoblJArzGYVfaqxeK5qk/U3jPA3m3wusU2QxFK55CAYOozA982wjcWkI6BeT2GIWTABYr+/1n6X5uKrUXwuFH6xgGZR/Oy3zGdRU9lLoMFZoazw/aX5yE/b3SIytR3Z/pd07onZwRE3ixh995RyC9TlPRx8E0mvQy8g39BeSPFFSfJZoz1WCMIeVxpt5vuENYYVbbh8nIr2+hc8wGUDs8ydNnEJ8bgAxBt/Nq2ArNSM53sxl0F8ZmulJT9EOkJ21zwLqtGgS/rl3BcBpHz6z31K/BfFE7RlRruQsieK1BPID2Do=
 
 before_script:
- - sudo service mysql stop
- - chmod +x deploy.sh
+- openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./.secret -out ./trykotlinwebdemo.pem -d -a
 
 script:
- - sh ./gradlew ::copyKotlinLibs
- - sh ./gradlew war
- - mkdir ./docker/frontend/war/
- - mkdir ./docker/backend/war/
- - cp ./kotlin.web.demo.server/build/libs/WebDemoWar.war ./docker/frontend/war/WebDemoWar.war
- - cp ./kotlin.web.demo.backend/build/libs/WebDemoBackend.war ./docker/backend/war/WebDemoBackend.war
- - mkdir certs
- - openssl req -newkey rsa:4096 -nodes -sha256 -keyout certs/dockerrepo.key -x509 -days 365 -out certs/dockerrepo.crt -subj /CN=local-registry
- - docker-machine create --driver none --url=tcp://107.23.241.80:2376 trykotlinweb
- - docker-machine ls
- - docker-machine regenerate-certs -f trykotlinweb
- - docker-machine env trykotlinweb
- - eval $(docker-machine env trykotlinweb)
- - docker-compose build
- - docker-compose up
+- ssh -i ~/.ssh/trykotlinwebdemo.pem  ubuntu@ec2-54-197-39-160.compute-1.amazonaws.com
+- cd kotlin-web-demo
+- sh deploy.sh
