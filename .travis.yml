@@ -1,7 +1,3 @@
-env:
-  global:
-    secure: CrTwTZhuhC2DYlaQax0H1NbdrYTQ2C1yn0tSNKVcY2IPaONg1HfVx0pcLY/Xto/43QQRHGRrB5Rcz3a3hIWuD0rdnQXUDWsKo1Bn2N1G14FBMPo1mvkO4aIMsePjVRGKOVMeOaGKF/eXTgAL2etxBpwsPD5g8+vI/ScLoXGHG6z154+hk/ylYE0tG6bKbGt46UX0MotlCuSXzB4ns1Ly4ntG89SbJ2rtBKnP1EBkmQiB+yv4yKp6okqdTA2P17yu0rJg5vXhJCJd83KnVTk0V+OTEqPHSv9APpOueH64bZGhypxHHN9IGIxpEhfWIDf1xFRmM8XMr+ec/wg879Hrd6JJvYJBWz56MfZPUG+Kl/eD4NzjcvbCgLrMT+MiZoblJArzGYVfaqxeK5qk/U3jPA3m3wusU2QxFK55CAYOozA982wjcWkI6BeT2GIWTABYr+/1n6X5uKrUXwuFH6xgGZR/Oy3zGdRU9lLoMFZoazw/aX5yE/b3SIytR3Z/pd07onZwRE3ixh995RyC9TlPRx8E0mvQy8g39BeSPFFSfJZoz1WCMIeVxpt5vuENYYVbbh8nIr2+hc8wGUDs8ydNnEJ8bgAxBt/Nq2ArNSM53sxl0F8ZmulJT9EOkJ21zwLqtGgS/rl3BcBpHz6z31K/BfFE7RlRruQsieK1BPID2Do=
-
 before_script:
 - openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./.secret -out ./trykotlinwebdemo.pem -d -a
 - chmod 400 ./trykotlinwebdemo.pem
