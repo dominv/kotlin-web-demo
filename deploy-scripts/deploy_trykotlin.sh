@@ -6,6 +6,7 @@ git subtree pull --prefix=trykotlin --message="[skip ci] Update subtree" https:/
 
 # Update arrow version
 echo 0.7.3 > arrowktversion
+git add arrowktversion
 git commit -m "[skip ci] Upgrading arrow version"
 
 # Push built subtree to trykotlinwebdemo
