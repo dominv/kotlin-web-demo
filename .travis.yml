@@ -1,22 +1,10 @@
-language: kotlin
-sudo: required
-dist: trusty
+branches:
+  only:
+   - master
 
-jdk:
-  - oraclejdk8
+before_script:
+- openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./.secret -out ./trykotlinwebdemo.pem -d -a
+- chmod 400 ./trykotlinwebdemo.pem
 
 script:
-  - ./gradlew codeCoverageReport
-  - bash <(curl -s https://codecov.io/bash)
-  - ./gradlew clean build :arrow-docs:runAnk 
-
-after_success:
-  - ./deploy-scripts/deploy.sh
-
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  local_dir: modules/docs/arrow-docs/build/site
-  on:
-    branch: master
+- ssh -o "StrictHostKeyChecking no" -q -i ./trykotlinwebdemo.pem $EC2 'cd kotlin-web-demo; sh deploy.sh; exit'
