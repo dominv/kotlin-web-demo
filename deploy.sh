@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-export ARROW_VERSION=`mvn io.arrow-kt:arrow-core:LATEST:evaluate -Dexpression=project.version`
-
-mvn io.arrow-kt:arrow-core:LATEST:evaluate -Dexpression=project.version
-
-echo $ARROW_VERSION
-
 git checkout master
 
 git pull
