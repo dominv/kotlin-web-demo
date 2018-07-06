@@ -11,4 +11,4 @@ git add .trykotlin/arrowktversion
 git commit -m "[skip ci] Upgrading arrow version"
 
 # Push built subtree to trykotlinwebdemo
-git subtree push --prefix=trykotlin https://github.com/dominv/kotlin-web-demo master master
+git subtree push --prefix .trykotlin https://github.com/dominv/kotlin-web-demo master master
