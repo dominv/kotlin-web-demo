@@ -1,20 +1,12 @@
 #!/usr/bin/env bash
 
-# Configure trykotlin git user
-
-0.7.
-
-git config --global user.name $USER_NAME
-git config --global user.email $USER_EMAIL
-
-# Pull latest version of published subtree
+git remote add trykotlin https://github.com/dominv/kotlin-web-demo
+git fetch trykotlin
+git checkout -b trykotlin-update-arrow-version trykotlin/master
 git checkout master
-git subtree pull --prefix=trykotlin --message="[skip ci] Update subtree" https://dominv:$GITHUB_API_KEY@github.com/dominv/kotlin-web-demo.git master
-
-
-
-# Push built subtree to trykotlin website
-#git subtree push --prefix=docs https://dominv:$GITHUB_API_KEY@github.com/dominv/kotlin-web-demo.git master
-
-
-#VERSION_NAME=$(getProperty "VERSION_NAME")
+git read-tree --prefix=trykotlin/arrow -u trykotlin-update-arrow-version
+cd arrow
+ls
+cat arrowktversion
+git commit -m "Merged library project as subdirectory"
+git push
