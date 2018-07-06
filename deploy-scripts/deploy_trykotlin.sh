@@ -5,7 +5,7 @@ git checkout master
 git subtree pull --prefix=trykotlin --message="[skip ci] Update subtree" https://github.com/dominv/kotlin-web-demo master
 
 # Update arrow version
-echo 0.7.3 > arrow/arrowktversion
+echo 0.7.3 > arrowktversion
 git commit -m "[skip ci] Upgrading arrow version"
 
 # Push built subtree to trykotlinwebdemo
