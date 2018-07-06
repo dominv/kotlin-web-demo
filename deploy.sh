@@ -2,10 +2,6 @@
 
 export ARROW_VERSION=`mvn io.arrow-kt:arrow-core:LATEST:evaluate -Dexpression=project.version`
 
-sudo apt-get -y install maven
-
-mvn -version
-
 mvn io.arrow-kt:arrow-core:LATEST:evaluate -Dexpression=project.version
 
 echo $ARROW_VERSION
