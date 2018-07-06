@@ -5,7 +5,7 @@ git fetch trykotlin
 git checkout trykotlin-update-arrow-version trykotlin/master -- arrow/arrowktversion
 
 # git checkout master
-#git read-tree --prefix=trykotlin/arrow -u trykotlin-update-arrow-version
+# git read-tree --prefix=trykotlin/arrow -u trykotlin-update-arrow-version
 cat arrowktversion
-git commit -m "Merged library project as subdirectory"
-git push
+# git commit -m "Merged library project as subdirectory"
+# git push
