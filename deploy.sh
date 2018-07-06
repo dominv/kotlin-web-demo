@@ -2,6 +2,14 @@
 
 export ARROW_VERSION=`mvn io.arrow-kt:arrow-core:LATEST:evaluate -Dexpression=project.version`
 
+sudo apt install mvn
+
+mvn -version
+
+mvn io.arrow-kt:arrow-core:LATEST:evaluate -Dexpression=project.version
+
+echo $ARROW_VERSION
+
 git checkout master
 
 git pull
