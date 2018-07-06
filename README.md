@@ -51,8 +51,9 @@ this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/mast
     - Commit `.secret` file and upload changes.
     - Create env var in travis for $TRAVIS_CI_SECRET
     - This has already been included in the .travis.yml file for this to work:
-    ```before_script:
-      - openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./.secret -out ./travisci-aws.pem -d -a```
+    ```before_script
+       - openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./.secret -out ./trykotlinwebdemo.pem -d -a
+       - chmod 400 ./trykotlinwebdemo.pem```
 
 ## Deploy to AWS using docker-machine and docker-compose:
 
