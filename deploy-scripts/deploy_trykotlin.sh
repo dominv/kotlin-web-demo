@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git remote add trykotlin https://github.com/dominv/kotlin-web-demo
+# git remote add trykotlin https://github.com/dominv/kotlin-web-demo
 git fetch trykotlin
 git checkout trykotlin-update-arrow-version trykotlin/master -- arrow/arrowktversion
 
