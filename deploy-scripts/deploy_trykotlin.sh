@@ -2,11 +2,9 @@
 
 # git remote add trykotlin https://github.com/dominv/kotlin-web-demo
 git fetch trykotlin
-git checkout trykotlin-update-arrow-version
 git checkout trykotlin/master -- arrowktversion
 
-# git checkout master
-# git read-tree --prefix=trykotlin/arrow -u trykotlin-update-arrow-version
 cat arrowktversion
-# git commit -m "Merged library project as subdirectory"
-# git push
+echo 0.7.3 >> arrowktversion
+git commit -m "Upgraded arrow version in trykotlin"
+git push
