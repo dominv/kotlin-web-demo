@@ -36,19 +36,22 @@ this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/mast
 - Download private key *.pem file
 - ```cp trykotlinwebdemo.pem ~/.ssh```
 - ```chmod 400 ~/.ssh/trykotlinwebdemo.pem```
+- Copy setup.sh: ```scp setup.sh <user>@<instance's public dns>:```
 - ```ssh -i ~/.ssh/trykotlinwebdemo.pem <user>@<instance's public dns>```
+- Run ```sh setup.sh```
 
-- copy setup.sh: ```scp setup.sh <user>@<instance's public dns>:```
-- run ```sh setup.sh```
-- ```export TRAVIS_CI_SECRET=`cat /dev/urandom | head -c 10000 | openssl sha1` ```
-- ```openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ~/.ssh/travisci-aws.pem -out ./.secret -a```
-- create env var with $TRAVIS_CI_SECRET
-- ```before_script:
-  - openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./.secret -out ./travisci-aws.pem -d -a```
+- For a manual deployment:
+    - ```cd kotlin-web-demo```
+    - run ```sh deploy.sh```
 
-- ```cd kotlin-web-demo```
-- run ```sh deploy.sh```
-
+- For an automatic deployment with travis:
+    - Go back to your local machine and run:
+    - ```export TRAVIS_CI_SECRET=`cat /dev/urandom | head -c 10000 | openssl sha1` ```
+    - ```openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ~/.ssh/travisci-aws.pem -out ./.secret -a```
+    - Create env var in travis for $TRAVIS_CI_SECRET
+    - This has already been included in the .travis.yml file for this to work:
+    ```before_script:
+      - openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./.secret -out ./travisci-aws.pem -d -a```
 
 ## Deploy to AWS using docker-machine and docker-compose:
 
