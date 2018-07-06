@@ -2,7 +2,7 @@
 
 export ARROW_VERSION=`mvn io.arrow-kt:arrow-core:LATEST:evaluate -Dexpression=project.version`
 
-sudo apt install mvn
+sudo apt-get -y install maven
 
 mvn -version
 
