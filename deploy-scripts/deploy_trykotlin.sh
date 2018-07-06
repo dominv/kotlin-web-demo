@@ -2,6 +2,7 @@
 
 # git remote add trykotlin https://github.com/dominv/kotlin-web-demo
 git fetch trykotlin
+git pull trykotlin
 git checkout trykotlin/master -- arrowktversion
 
 cat arrowktversion
