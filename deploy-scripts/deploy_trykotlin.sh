@@ -8,9 +8,7 @@ git subtree pull --prefix .trykotlin --message="Update trykotlin subtree" https:
 # Update arrow version
 
 echo $VERSION_NAME > .trykotlin/arrowktversion
-git add .trykotlin/versions/1.0.7/gradle.properties
-git add .trykotlin/versions/1.1.60/gradle.properties
-git add .trykotlin/versions/1.2.31/gradle.properties
+git add .trykotlin/arrowktversion
 git commit -m "Upgrading arrow version in trykolin"
 
 # Push built subtree to trykotlinwebdemo
