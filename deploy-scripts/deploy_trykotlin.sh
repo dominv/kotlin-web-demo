@@ -13,6 +13,6 @@ git commit -m "Upgrading arrow version in trykolin"
 
 # Push built subtree to trykotlinwebdemo
 git subtree push --prefix .trykotlin https://github.com/dominv/kotlin-web-demo.git master
-rm -rf .trykotlin
+rm -rfd .trykotlin
 git add .trykotlin/
 git commit -m "Cleaning trykotlin"
