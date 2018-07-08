@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2017 The Arrow Authors
+ * Copyright 2000-2016 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,165 +15,109 @@
  */
 
 buildscript {
-    ext {
-        // Constants
-        gradleVersion = '4.4.1'
-        gradleVersionsPluginVersion = '0.17.0'
-        javaVersion = JavaVersion.VERSION_1_7
-        kotlinTestVersion = '2.0.7'
-        kotlinVersion = '1.2.41'
-        daggerVersion = '2.15'
-        kotlinxCoroutinesVersion = '0.23.3'
-        kotlinxCollectionsImmutableVersion = '0.1'
-    }
-
     repositories {
-        jcenter()
-        maven { url 'https://jitpack.io' }
-        maven { url "http://dl.bintray.com/kotlin/kotlin-dev" }
-        maven { url "https://dl.bintray.com/jetbrains/markdown/" }
-        maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
-    }
-
-    dependencies {
-        classpath "com.github.ben-manes:gradle-versions-plugin:$gradleVersionsPluginVersion"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
-        classpath 'io.arrow-kt:ank-gradle-plugin:0.7.1'
-        classpath 'org.ajoberstar:gradle-git-publish:0.3.2'
-        classpath "net.rdrei.android.buildtimetracker:gradle-plugin:0.11.0"
+        mavenCentral()
+        maven { url "https://dl.bintray.com/kotlin/kotlin-dev" }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 }
-
-apply from: 'detekt.gradle.kts'
+ext.kotlinVersion = kotlin_version
+ext.kotlinConfigs = gradle.ext.kotlinConfigs
+ext.kotlinVersions = kotlinConfigs.collect { it.version }
 
 allprojects {
-    apply plugin: 'base'
-
-    clean.doFirst {
-        delete "${rootDir}/infographic/arrow-infographic.txt"
-    }
-
     repositories {
         jcenter()
-        maven { url 'https://kotlin.bintray.com/kotlinx' }
-        maven { url "http://dl.bintray.com/kotlin/kotlin-dev" }
-        maven { url "http://dl.bintray.com/arrow-kt/arrow-kt" }
-        maven { url "https://dl.bintray.com/jetbrains/markdown/" }
-        maven { url 'https://jitpack.io' }
+        maven { url "https://dl.bintray.com/kotlin/kotlin-dev" }
+        maven { url "https://kotlin.bintray.com/kotlin-eap-1.2" }
     }
 }
 
-subprojects { project ->
+configure(allprojects.findAll({
+    it.name != 'kotlin.web.demo.frontend'
+})) {
+    apply plugin: 'java'
+    sourceCompatibility = java_version
+    targetCompatibility = java_version
 
-    group = GROUP
-    version = VERSION_NAME
-
-    apply plugin: 'kotlin'
-    apply plugin: 'jacoco'
-
-    archivesBaseName = POM_ARTIFACT_ID
-
-    jacoco {
-        toolVersion '0.8.1'
+    repositories {
+        mavenCentral()
     }
 
-    task codeCoverageReport(type: JacocoReport) {
-        reports {
-            xml.enabled true
-            xml.destination file("${buildDir}/reports/jacoco/report.xml")
-            html.enabled true
-            csv.enabled false
-        }
-
-        classDirectories = fileTree(
-                dir: 'build/classes/kotlin/main',
-        )
-
-        sourceDirectories = files('src/main/kotlin')
-        executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-    }
-
-    apply plugin: 'com.jfrog.bintray'
-
-    bintray {
-        publish = true
-        user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-        key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
-        configurations = ['archives']
-        pkg {
-            repo = 'arrow-kt'
-            name = project.name
-            userOrg = POM_DEVELOPER_ID
-            licenses = ['Apache-2.0']
-            vcsUrl = 'https://github.com/arrow-kt/arrow.git'
-        }
-    }
-
-    compileKotlin.kotlinOptions.freeCompilerArgs += ["-Xskip-runtime-version-check"]
-
-    test {
-        testLogging {
-            events "passed", "skipped", "failed", "standardOut", "standardError"
-        }
-    }
-
-    tasks.withType(Test) {
-        maxParallelForks = Runtime.runtime.availableProcessors()
-    }
-
-    build.dependsOn ':detekt'
-
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaVersion
-
-    apply plugin: "build-time-tracker"
-
-    buildtimetracker {
-        reporters {
-            csv {
-                output "build/times.csv"
-                append true
-                header false
+    sourceSets {
+        test {
+            java {
+                srcDir 'test'
             }
         }
     }
-}
 
-configurations {
-    buildableProjects
-}
-
-dependencies {
-    buildableProjects(subprojects)
-}
-
-tasks.create('repl') {
-    final classpathConfig = rootProject.buildscript.configurations.getByName("classpath")
-    final buildableProjectsConfig = configurations.getByName('buildableProjects')
-    dependsOn(buildableProjectsConfig)
-    doFirst {
-        javaexec {
-            classpath(
-                    classpathConfig.resolvedConfiguration.resolvedArtifacts.findAll {
-                        it.moduleVersion.id.group == 'org.jetbrains.kotlin'
-                    }.collect {
-                        it.file
-                    }
-            )
-            main = "org.jetbrains.kotlin.cli.jvm.K2JVMCompiler"
-            standardInput = System.in
-            args("-cp", buildableProjectsConfig.files.join(':'))
-        }
+    dependencies {
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.7.4', transitive: true
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.4', transitive: true
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.7.4', transitive: true
+        compile 'commons-logging:commons-logging:1.2'
     }
 }
 
-task wrapper(type: Wrapper) {
-    distributionUrl = "https://services.gradle.org/distributions/gradle-${project.ext.gradleVersion}-all.zip"
+configure([
+        project(':kotlin.web.demo.server'),
+        project(':kotlin.web.demo.backend'),
+        project(':kotlin.web.demo.common'),
+        project(':kotlin.web.demo.executors'),
+        project(':kotlin.web.demo.backend:compilers'),
+        project(':kotlin.web.demo.test')
+]) {
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+        compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.7.4"
+    }
 }
 
-apply plugin: 'com.github.ben-manes.versions'
-
-configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+configure([
+        project(':kotlin.web.demo.server'),
+        project(':kotlin.web.demo.backend'),
+        project(':kotlin.web.demo.backend:compilers'),
+        project(':kotlin.web.demo.test')
+]) {
+    dependencies {
+        compile project(':kotlin.web.demo.common')
+    }
 }
+
+task copyKotlinLibs() {}
+
+for (kotlinVersion in kotlinVersions) {
+    copyKotlinLibs.dependsOn(":versions:$kotlinVersion:copyKotlinLibs")
+}
+
+project("kotlin.web.demo.executors") {
+    dependencies {
+        compile group: 'junit', 'name': 'junit', 'version': '4.12'
+    }
+
+    task copyToLib(type: Copy) {
+        into "$buildDir/libs"
+        from configurations.compile
+    }
+    jar.dependsOn(copyToLib)
+}
+
+project('kotlin.web.demo.test') {
+    dependencies {
+        testCompile project(':kotlin.web.demo.backend:compilers')
+        testCompile project(':kotlin.web.demo.backend')
+        testCompile project(':kotlin.web.demo.server')
+        testCompile group: 'org.jetbrains.kotlin', 'name': 'kotlin-test', 'version': '1.1.51'
+        testCompile group: 'junit', 'name': 'junit', 'version': '4.12'
+    }
+    for (kotlinVersion in kotlinVersions) {
+        test.dependsOn(":versions:$kotlinVersion:classes")
+    }
+    test.dependsOn(":kotlin.web.demo.executors:jar")
+//    test.dependsOn(":copyKotlinLibs")
+}
+
+project(':versions').jar { onlyIf { false } }
