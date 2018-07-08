@@ -2,8 +2,6 @@
 
 export ARROW_VERSION=$(cat arrowktversion)
 
-echo $ARROW_VERSION
-
 git checkout master
 
 git pull

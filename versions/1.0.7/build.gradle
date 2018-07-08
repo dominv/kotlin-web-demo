@@ -54,7 +54,9 @@ dependencies {
      * };
      */
 
-    arrowKtVersion = System.getenv('ARROW_VERSION')
+    arrowKtVersion = "$System.env.ARROW_VERSION"
+
+    println System.env.ARROW_VERSION
 
     library group: 'io.arrow-kt', name: 'arrow-core', version: arrowKtVersion
     library group: 'io.arrow-kt', name: 'arrow-syntax', version: arrowKtVersion
