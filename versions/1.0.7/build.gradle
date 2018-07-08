@@ -26,7 +26,6 @@ dependencies {
     library tc("$prefix/kotlin-reflect.jar")
     library tc("$prefix/kotlin-test.jar")
     library tc("$prefix/kotlin-jslib.jar")
-    library group: 'io.arrow-kt', name: 'arrow-data', version: arrowKtVersion
 
     /**
      * ADD DEPENDENCIES TO KOTLIN 1.0.7 COMPILER
@@ -54,6 +53,8 @@ dependencies {
      *      permission java.lang.RuntimePermission "accessDeclaredMembers";
      * };
      */
+
+    arrowKtVersion = System.getenv('ARROW_VERSION')
 
     library group: 'io.arrow-kt', name: 'arrow-core', version: arrowKtVersion
     library group: 'io.arrow-kt', name: 'arrow-syntax', version: arrowKtVersion

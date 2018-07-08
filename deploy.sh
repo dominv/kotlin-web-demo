@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export ARROW_VERSION=$(cat arrowktversion)
+
 git checkout master
 
 git pull
