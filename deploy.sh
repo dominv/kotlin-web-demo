@@ -6,6 +6,8 @@ git checkout master
 
 git pull
 
+sh gradlew clean
+
 sh gradlew war
 
 sudo cp ./kotlin.web.demo.server/build/libs/WebDemoWar.war ./docker/frontend/war/WebDemoWar.war
