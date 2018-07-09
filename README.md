@@ -49,8 +49,8 @@ this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/mast
     - ```export TRAVIS_CI_SECRET=`cat /dev/urandom | head -c 10000 | openssl sha1` ```
     - ```openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ~/.ssh/trykotlinwebdemo.pem -out ./.secret -a```
     - Commit `.secret` file and upload changes.
-    - Create env var in travis for $TRAVIS_CI_SECRET
-    - Create env var in travis for $EC2 = <user>@<instance's public dns>
+    - Create env var in travis for `$TRAVIS_CI_SECRET`
+    - Create env var in travis for `$EC2 = <user>@<instance's public dns>`
     - This has already been included in the .travis.yml file for this to work:
     ```before_script
        - openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./.secret -out ./trykotlinwebdemo.pem -d -a
