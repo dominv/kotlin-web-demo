@@ -12,12 +12,12 @@ git checkout -f trykotlin_master
 git subtree split --squash --prefix arrowkt -b trykotlin_temp
 
 # Update arrow version
-echo $VERSION_NAME > .trykotlin/arrowktversion
-git add .trykotlin/arrowktversion
+echo $VERSION_NAME > arrowkt/arrowktversion
+git add arrowkt/arrowktversion
 git commit -m "Upgrading arrow version in trykolin"
 
 # Push built subtree to trykotlinwebdemo
-git subtree push --prefix .trykotlin https://github.com/dominv/kotlin-web-demo.git master
+git push trykotlin_temp https://github.com/dominv/kotlin-web-demo.git master
 rm -rf .trykotlin
 git add .trykotlin/
 git commit -m "Cleaning trykotlin"
