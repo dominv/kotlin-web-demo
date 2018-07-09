@@ -3,7 +3,7 @@
 # Add and pull latest version of trykotlin subtree
 git checkout -b trykotlin-deployment
 git subtree add --prefix .trykotlin https://github.com/dominv/kotlin-web-demo.git master --squash
-git subtree pull --prefix .trykotlin --message="Update trykotlin subtree" https://github.com/dominv/kotlin-web-demo.git master --squash
+#git subtree pull --prefix .trykotlin --message="Update trykotlin subtree" https://github.com/dominv/kotlin-web-demo.git master --squash
 
 # Update arrow version
 echo $VERSION_NAME > .trykotlin/arrowktversion
