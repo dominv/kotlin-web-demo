@@ -1,146 +1,134 @@
-<img height="100" src="https://avatars2.githubusercontent.com/u/29458023?v=4&amp;s=200" width="100">
+[![official JetBrains project](http://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.arrow-kt/arrow-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.arrow-kt/arrow-core)
-[![Build Status](https://travis-ci.org/arrow-kt/arrow.svg?branch=master)](https://travis-ci.org/arrow-kt/arrow/)
-[![Kotlin version badge](https://img.shields.io/badge/kotlin-1.2.41-blue.svg)](http://kotlinlang.org/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-[![codecov](https://codecov.io/gh/arrow-kt/arrow/branch/master/graph/badge.svg)](https://codecov.io/gh/arrow-kt/arrow)
+This repository contains sources for [try.kotl.in]( http://try.kotlinlang.org/)
 
-Λrrow is a library for Typed Functional Programming in Kotlin.
-It includes the most popular data types, type classes and abstractions such as `Option`, `Try`, `Either`, `IO`, `Functor`, `Applicative`, `Monad` and many more empowering users to define pure FP apps and libraries built atop higher order abstractions. Use the below list to learn more about Λrrow's main features.
-
-- [Documentation](http://arrow-kt.io)
-- [Patterns](http://arrow-kt.io/docs/patterns/glossary/): tutorials and approaches to day-to-day challenges using FP 
-- [Libraries](http://arrow-kt.io/docs/quickstart/libraries/): all the libraries provided by Λrrow
-- [Type classes](http://arrow-kt.io/docs/typeclasses/intro/): defining behaviors for data
-- [Data types](http://arrow-kt.io/docs/datatypes/intro/): common abstractions
-- [Effects](http://arrow-kt.io/docs/effects/io/): interfacing with external systems
-- [Optics](http://arrow-kt.io/docs/optics/iso/): inspecting and modifying data structures
-
-#### Curated external links
-
-- [Projects and Examples](http://arrow-kt.io/docs/quickstart/projects/)
-- [Blogs and Presentations](http://arrow-kt.io/docs/quickstart/blogs/)
-
-# Basic Setup
-
-Make sure to have the latest version of JDK 1.8 installed.
-
-Add it in your root `build.gradle` at the end of repositories.
-
-```groovy
-allprojects {
-    repositories {
-        jcenter()
-    }
-}
+## Manual installation :whale:
+Before starting the Kotlin-Web-Demo execute two gradle tasks: `copyKotlinLibs` for downloading kotlin libraries for compiler and 
+`war` for building war-archive from IDE or terminal: 
+```bash
+$ gradlew ::copyKotlinLibs
+$ gradlew war
 ```
 
-Add the dependencies into the project's `build.gradle`
+By default `try.kotl.in` uses port 8080, and if that's OK, just make it available at `http://localhost:8080` via this command:
 
-```groovy
-def arrow_version = "0.7.2"
-dependencies {
-    compile "io.arrow-kt:arrow-core:$arrow_version"
-    compile "io.arrow-kt:arrow-syntax:$arrow_version"
-    compile "io.arrow-kt:arrow-typeclasses:$arrow_version" 
-    compile "io.arrow-kt:arrow-data:$arrow_version" 
-    compile "io.arrow-kt:arrow-instances-core:$arrow_version"
-    compile "io.arrow-kt:arrow-instances-data:$arrow_version"
-    kapt    "io.arrow-kt:arrow-annotations-processor:$arrow_version" 
-    
-    compile "io.arrow-kt:arrow-free:$arrow_version" //optional
-    compile "io.arrow-kt:arrow-mtl:$arrow_version" //optional
-    compile "io.arrow-kt:arrow-effects:$arrow_version" //optional
-    compile "io.arrow-kt:arrow-effects-rx2:$arrow_version" //optional
-    compile "io.arrow-kt:arrow-effects-reactor:$arrow_version" //optional
-    compile "io.arrow-kt:arrow-effects-kotlinx-coroutines:$arrow_version" //optional
-    compile "io.arrow-kt:arrow-optics:$arrow_version" //optional
-    compile "io.arrow-kt:arrow-generic:$arrow_version" //optional
-    compile "io.arrow-kt:arrow-recursion:$arrow_version" //optional
-}
+```bash
+$ docker-compose up
 ```
 
-# Additional Setup
+To change the port number, tweak 'docker-compose.yml':
 
-For projects that wish to use their own `@higherkind`, `@optics` and other meta programming facilities provided by Λrrow
-the setup below is also required:
-
-Add the dependencies into the project's `build.gradle`
-
-```groovy
-apply plugin: 'kotlin-kapt' //optional
-apply from: rootProject.file('gradle/generated-kotlin-sources.gradle') //optional
-
-def arrow_version = "0.7.2"
-dependencies {
-    ...
-    kapt    'io.arrow-kt:arrow-annotations-processor:$arrow_version' //optional
-    ...
-}
+```bash
+    ports:
+      - "your_port:8080"
 ```
 
-JVM projects:
+If you'd like to log in to JetBrains account, Google, Facebook, GitHub, or Twitter, add corresponding keys to
+this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/master/docker/frontend/conf/Catalina/localhost/ROOT.xml):
 
-`gradle/generated-kotlin-sources.gradle`
-```groovy
-apply plugin: 'idea'
+```xml
+    <Environment name="github_key" value="YOUR-KEY" type="java.lang.String" override="false"/>
+    <Environment name="github_secret" value="YOUR-SECRET-KEY" type="java.lang.String" override="false"/>
+```
+## Deploy to AWS:
 
-idea {
-    module {
-        sourceDirs += files(
-            'build/generated/source/kapt/main',
-            'build/generated/source/kaptKotlin/main',
-            'build/tmp/kapt/main/kotlinGenerated')
-        generatedSourceDirs += files(
-            'build/generated/source/kapt/main',
-            'build/generated/source/kaptKotlin/main',
-            'build/tmp/kapt/main/kotlinGenerated')
-    }
-}
+- Create instance in ec2 console (Ubuntu Server, t2.small recommended)
+- Download private key *.pem file
+- ```cp trykotlinwebdemo.pem ~/.ssh```
+- ```chmod 400 ~/.ssh/trykotlinwebdemo.pem```
+- Copy setup.sh: ```scp setup.sh <user>@<instance's public dns>:```
+- ```ssh -i ~/.ssh/trykotlinwebdemo.pem <user>@<instance's public dns>```
+- Run ```sh setup.sh```
+
+- For a manual deployment:
+    - ```cd kotlin-web-demo```
+    - run ```sh deploy.sh```
+
+- For an automatic deployment with `travis`:
+    - Go back to your local machine and run:
+    - ```export TRAVIS_CI_SECRET=`cat /dev/urandom | head -c 10000 | openssl sha1` ```
+    - ```openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ~/.ssh/trykotlinwebdemo.pem -out ./.secret -a```
+    - Commit `.secret` file and upload changes.
+    - Create env var in travis for $TRAVIS_CI_SECRET
+    - Create env var in travis for $EC2 = <user>@<instance's public dns>
+    - This has already been included in the .travis.yml file for this to work:
+    ```before_script
+       - openssl aes-256-cbc -pass "pass:$TRAVIS_CI_SECRET" -in ./.secret -out ./trykotlinwebdemo.pem -d -a
+       - chmod 400 ./trykotlinwebdemo.pem```
+
+## Deploy to AWS using docker-machine and docker-compose:
+
+ - Install docker in your localhost. [Installation link](https://docs.docker.com/engine/installation/)
+ - Install docker-machine in your localhost. [Installation link](https://docs.docker.com/machine/install-machine/)
+ - Set up your AWS credentials in your localhost. [docker-machine + aws](https://docs.docker.com/machine/drivers/aws/)
+ - Create AWS EC2 instance only the first time:
+ ```bash
+docker-machine create --driver amazonec2 <your-instance-name>
+ ```
+ - Connect to your AWS EC2 instance using:
+```bash
+docker-machine ssh <your-instance-name>
+```
+ - We recommend to use ```screen -D -RR```
+ - Clone this repo:
+```bash
+git clone https://github.com/dominv/kotlin-web-demo
+```
+ - Go to kotlin-web-demo directory and run ```sh deploy.sh``` script.
+ - When it finishes, run:
+```bash
+sudo docker-compose build
+```
+ - And finally:
+ ```bash
+ sudo docker-compose up
+ ```
+
+## How to add your own courses :memo:
+
+
+  - Add a course name to [manifest.json](https://github.com/JetBrains/kotlin-web-demo/tree/master/kotlin.web.demo.server/examples).
+  - Use that name to create a folder next to the [Examples folder](https://github.com/JetBrains/kotlin-web-demo/tree/master/kotlin.web.demo.server/examples)
+  and put your course content under it.
+  - Make a folder for each of the course topics (and don't forget adding them to `manifest.json`).
+  - After that, create:
+     1. Test.kt — for test questions
+     2. Task.kt — for preview
+     3. Solution.kt — for answers to the test questions
+     4. task.md - tasks descriptions
+     5. manifest.json - to store 'junit' [configuration](https://github.com/JetBrains/kotlin-web-demo/blob/master/kotlin.web.demo.server/examples/Kotlin%20Koans/Introduction/Hello%2C%20world!/manifest.json)
+
+   See [Kotlin-Koans](https://github.com/JetBrains/kotlin-web-demo/tree/master/kotlin.web.demo.server/examples/Kotlin%20Koans) for examples.
+
+## How to add your dependencies to kotlin compiler :books:
+
+Just put whatever you need as dependencies to [gradle.build](https://github.com/JetBrains/kotlin-web-demo/blob/master/versions/1.1.60/build.gradle) via gradle task called `library`:
+
+```gradle
+ library "your dependency"
 ```
 
-Android projects:
+NOTE: If the library you're adding uses reflection, accesses the file system, or performs any other type of security-sensitive operations, don't forget to
+configure the [executors.policy.template](https://github.com/JetBrains/kotlin-web-demo/blob/master/kotlin.web.demo.backend/src/main/resources/executors.policy.template)
+in `web-demo-backend`. [Click here](https://docs.oracle.com/javase/7/docs/technotes/guides/security/PolicyFiles.html) for more information about *Java Security Police*
 
-`gradle/generated-kotlin-sources.gradle`
-```groovy
-apply plugin: 'idea'
+**How to set Java Security Police in `executors.policy.template`**
 
-idea {
-    module {
-        sourceDirs += files(
-                'build/generated/source/kapt/main',
-                'build/generated/source/kapt/debug',
-                'build/generated/source/kapt/release',
-                'build/generated/source/kaptKotlin/main',
-                'build/generated/source/kaptKotlin/debug',
-                'build/generated/source/kaptKotlin/release',
-                'build/tmp/kapt/main/kotlinGenerated')
-        generatedSourceDirs += files(
-                'build/generated/source/kapt/main',
-                'build/generated/source/kapt/debug',
-                'build/generated/source/kapt/release',
-                'build/generated/source/kaptKotlin/main',
-                'build/generated/source/kaptKotlin/debug',
-                'build/generated/source/kaptKotlin/release',
-                'build/tmp/kapt/main/kotlinGenerated')
-    }
-}
+If you want to a customm dependency, use the marker `@WRAPPERS_LIB@`:
+
+```
+grant codeBase "file:@WRAPPERS_LIB@/junit-4.12.jar" {
+  permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
+  permission java.lang.RuntimePermission "setIO";
+  permission java.io.FilePermission "<<ALL FILES>>", "read";
+  permission java.lang.RuntimePermission "accessDeclaredMembers";
+};
 ```
 
-# License
+## Feedback and Issue reporting :construction_worker:
 
-    Copyright (C) 2017 The Λrrow Authors
+We're constantly working on making it easier to add your own courses to `try.kotl.in` and would appreciate ideas, suggestions,
+and other feedback, so if you have any, please [use our issue tracker](https://youtrack.jetbrains.com/issues/KT#newissue=25-1925867) to share it with us.
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
+And, of course, if you have any bug reports, you can [file them as well](https://youtrack.jetbrains.com/issues/KT#newissue=25-1925867)
+If you need any help with compiling or running the project locally, join the `#kontributors` channel in the [Kotlin Slack](http://slack.kotlinlang.org), and we'll be happy to help you out.
