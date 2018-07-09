@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-rm -rf .cache
-
-export ARROW_VERSION=$(cat arrowktversion)
+export ARROW_VERSION=$(cat arrowKtVersion)
 
 git checkout master
 
