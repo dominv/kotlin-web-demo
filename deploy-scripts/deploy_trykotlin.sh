@@ -6,6 +6,7 @@
 #git subtree pull --prefix .trykotlin --message="Update trykotlin subtree" https://github.com/dominv/kotlin-web-demo.git master --squash
 
 git remote add trykotlin https://github.com/dominv/kotlin-web-demo.git
+git fetch
 git branch trykotlin_master trykotlin/master
 
 git checkout -f trykotlin_master
