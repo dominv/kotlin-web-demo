@@ -33,7 +33,7 @@ this [configuration file](https://github.com/JetBrains/kotlin-web-demo/blob/mast
 ## Deploy to AWS:
 
 - Create instance in ec2 console (Ubuntu Server, t2.small recommended with 16 GB storage)
-- Download private key *.pem file
+- Download private key and save as `trykotlinwebdemo.pem` file (or the name you choose)
 - ```cp trykotlinwebdemo.pem ~/.ssh```
 - ```chmod 400 ~/.ssh/trykotlinwebdemo.pem```
 - Copy setup.sh: ```scp setup.sh <user>@<instance's public dns>:```
